@@ -4,11 +4,28 @@
     name: openssh-server
     state: present
 
-- name: copy ssh config file
-  copy:
-    src: sshd_config
-    dest: /etc/ssh/sshd_config
-    owner: root
-    group: root
-    mode: '-rw-r--r--'
+#- name: copy ssh config file
+  ###old solution but doesn't keep defaults
+  #copy:
+  #  src: sshd_config
+  #  dest: /etc/ssh/sshd_config
+  #  owner: root
+  #  group: root
+  #  mode: '-rw-r--r--'
+- name: disable password auth
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    state: present
+    validate: 'sshd -t -f %s'
+  notify: restart ssh service
+
+- name: enable publickey auth
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PubkeyAuthentication'
+    line: 'PubkeyAuthentication yes'
+    state: present
+    validate: 'sshd -t -f %s'
   notify: restart ssh service
