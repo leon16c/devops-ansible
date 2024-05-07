@@ -12,6 +12,8 @@
   #  owner: root
   #  group: root
   #  mode: '-rw-r--r--'
+  #notify: restart ssh service
+  
 - name: disable password auth
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
