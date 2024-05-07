@@ -15,7 +15,7 @@
 - name: disable password auth
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: '^PasswordAuthentication'
+    regexp: '^#?PasswordAuthentication'
     line: 'PasswordAuthentication no'
     state: present
     validate: 'sshd -t -f %s'
@@ -24,7 +24,7 @@
 - name: enable publickey auth
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: '^PubkeyAuthentication'
+    regexp: '^#?PubkeyAuthentication'
     line: 'PubkeyAuthentication yes'
     state: present
     validate: 'sshd -t -f %s'
