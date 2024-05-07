@@ -12,9 +12,3 @@
     group: root
     mode: '-rw-r--r--'
   notify: restart ssh service
-
-handlers:
-  - name: restart ssh service
-    service:
-      name: ssh
-      state: restarted
