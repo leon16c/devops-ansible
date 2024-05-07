@@ -1,0 +1,8 @@
+---
+- name: devops playbook
+  hosts: localhost
+  become: true
+  roles:
+    - ufw
+    - cron
+    - ssh-login

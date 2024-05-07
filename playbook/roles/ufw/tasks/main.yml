@@ -1,0 +1,39 @@
+---
+- name: ufw installed
+  apt:
+    name: ufw
+    state: present
+
+- name: ssh
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+
+- name: http
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: https
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+
+- name: pop3
+  ufw:
+    rule: allow
+    port: 110
+    proto: tcp
+
+- name: smtp
+  ufw:
+    rule: allow
+    port: 587
+    proto: tcp
+
+- name: enable ufw
+  ufw:
+    state: enabled

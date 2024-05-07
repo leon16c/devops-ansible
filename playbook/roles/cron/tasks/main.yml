@@ -1,0 +1,12 @@
+---
+- name: cron installed
+  apt:
+    name: cron
+    state: present
+
+- name: add cron job to reboot server daily at 04:00
+  cron:
+    name: "daily reboot at 04:00"
+    hour: "4"
+    minute: "0"
+    job: "/sbin/reboot"
